@@ -1,0 +1,22 @@
+#!/bin/bash
+
+DEST_FILE=/home/fabio/src/pyxie/pyxie-docker/docks/dashboard/dashboard.tar.bz2
+
+start=$(pwd)
+
+cd src/components
+cp axios.js.docker axios.js
+
+cd $start
+
+yarn build
+
+cd build
+find . -name "*.map" -exec rm {} \;
+
+echo "Building package ..."
+tar cvfj $DEST_FILE *
+
+cd $start
+cd src/components
+cp axios.js.local axios.js

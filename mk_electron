@@ -1,0 +1,38 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]
+then
+	echo "mk_electron (server_url)"
+	exit 1
+fi
+
+server_url=$1
+
+v=$(echo $server_url | grep -c "http")
+
+if (( $v <= 0 ))
+then
+	echo "ERROR: server_url MUST contain http / https"
+	exit 1
+fi
+
+start=$(pwd)
+
+cd src/components
+sed "s!%SERVER_URL%!$server_url!" axios.js.deploy > axios.js
+
+cd $start
+
+yarn build
+
+cd build
+find . -name "*.map" -exec rm {} \;
+
+cd $start
+
+echo "Copy to Electron build ..."
+cp -r build ~/src/pyxie/studio/.
+
+
+cd src/components
+cp axios.js.local axios.js

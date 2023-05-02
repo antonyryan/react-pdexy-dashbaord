@@ -1,0 +1,78 @@
+.sortable-table .table thead th {
+	cursor: pointer;
+	position: relative;
+	text-align: center;
+	min-height: 80px;
+	background-color: #db3615; 
+	color: #fff;
+	padding: 5px;
+	line-height: 25px;
+	height: 80px;
+	border-bottom: 5px solid #ccc;
+}
+.sortable-table .table thead th.sort-desc, .sortable-table .table thead th.sort-asc {
+	background-color: #e0914c;
+	border-bottom: 5px solid #c70000;
+}
+
+.sortable-table .form-control {
+	height: default !important;
+}
+
+/*
+.sortable-table .table tbody td:first-child {
+	background-color: #f9f9f9;
+	font-family: 'Oxygen', sans-serif;
+}
+.sortable-table .table tbody tr:hover td {
+	background-color: #f7e1ce;
+	color: #000;
+}
+
+.sortable-table .table tbody tr td {
+	padding: 10px;
+	background-color: #fff;
+	border-top-color: #ddd;
+	color: #222;
+}
+*/
+.sortable-table .table tbody tr td img {
+	width: 100%;
+	height: auto;
+}
+.sortable-table .search-box {
+	padding: 10px 0px;
+}
+.sortable-table .search-box input.search {
+	width: 200px;
+	margin-left: 10px;
+	height: 30px;
+	border: none;
+	padding-left: 10px;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+	border: 2px solid #c30;
+}
+.sortable-table .pager {
+	margin: 5px 0;
+}
+.sortable-table .pager > * {
+	float: left;
+}
+.sortable-table .pager select.page-select {
+	width: 80px;
+}
+.sortable-table .pager:after {
+	content: "";
+	clear: both;
+	display: block;
+}
+.sortable-table .pager .SortableTblLabel {
+	height: 30px;
+	line-height: 30px;
+}
+.sortable-table .desc {
+	margin: 5px 0;
+	text-align: right;
+}
