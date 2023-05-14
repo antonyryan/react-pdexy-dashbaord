@@ -1,0 +1,71 @@
+/*
+body {
+	background-color: #ddd;
+}
+*/
+
+.suggest-container
+{
+	position: absolute;
+	top: 20px; 
+	left: 45px; 
+	z-index: 1000; 
+	width: 90%;
+}
+
+.suggest-container .text
+{
+	width: 70%;
+	float: left;
+}
+
+.suggest-container .range
+{
+	float: left; 
+	width: 20%; 
+	padding: 0 20px 0 20px;
+}
+
+.geosuggest {
+	width: 100% !important;
+	margin: 0 !important;
+}
+
+.geosuggest__item {
+	color: black !important;
+}
+
+.geosuggest-item {
+	color: black !important;
+}
+
+.geosuggest-item-active {
+	background: lightgray;
+}
+
+.form-control {
+	/* height: 44px; */
+}
+
+.card-clip-button {
+	margin-right: 10px;
+}
+
+.clips-col {
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-top: 10px;
+}
+
+.clip-map-container {
+	height: 80vh;
+	width: 100%;
+	position: relative;
+	padding-top: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.rdtPicker {
+	color: #000 !important;
+}	
