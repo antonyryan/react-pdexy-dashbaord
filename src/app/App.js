@@ -15,9 +15,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import 'react-geosuggest/module/geosuggest.css';
 import 'react-datetime/css/react-datetime.css';
-import './main/assets/dark.min.css';
-import './main/assets/app.css';
-import './main/assets/sortable.css';
+import './assets/dark.min.css';
+import './assets/app.css';
+import './assets/sortable.css';
 
 const jss = create({
     ...jssPreset(),

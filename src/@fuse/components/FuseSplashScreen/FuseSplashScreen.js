@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../../assets/logo.svg'
+import logo from '../../../app/assets/logo.svg'
 
 function FuseSplashScreen()
 {

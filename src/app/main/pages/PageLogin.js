@@ -3,7 +3,7 @@ import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import Login from '../components/Login/Login';
 
-import logo from '../assets/logo.svg';
+import logo from '../../assets/logo.svg';
 
 
 class PageLogin extends React.Component

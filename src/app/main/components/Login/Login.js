@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import TextField from '@material-ui/core/TextField';
 
 import { auth_login } from './actions';
 import { app_baseurl } from '../App/actions';
@@ -43,7 +44,15 @@ class Login extends React.Component {
 				<Form>
 					<FormGroup>
 						<Label for="email">Email</Label>
-						<Input type="email" name="email" id="email" placeholder="Insert your email" onChange={this.update} value={this.state.email}/>
+						<TextField
+							id="email"
+							name="email"
+							label="Insert your email"
+							value={this.state.email}
+							onChange={this.update}
+							margin="normal"
+							variant="outlined"
+						/>
 					</FormGroup>
 					<FormGroup>
 						<Label for="password">Password</Label>
