@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 
 import { withRouter } from 'react-router-dom';
 
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Form, FormGroup, Label, Input } from 'reactstrap';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 import { auth_login } from './actions';
 import { app_baseurl } from '../App/actions';
@@ -40,33 +42,38 @@ class Login extends React.Component {
 	render () 
 	{
 		return (
-			<div>
-				<Form>
-					<FormGroup>
-						<Label for="email">Email</Label>
+				<Grid container>
+					<Grid item xs={12}>
 						<TextField
 							id="email"
 							name="email"
-							label="Insert your email"
+							label="Email"
 							value={this.state.email}
 							onChange={this.update}
 							margin="normal"
 							variant="outlined"
+							fullWidth
 						/>
-					</FormGroup>
-					<FormGroup>
-						<Label for="password">Password</Label>
-						<Input type="password" name="password" id="examplePassword" placeholder="Password here" onChange={this.update} value={this.state.password}/>
-					</FormGroup>
-					{/*
-					<FormGroup>
-						<Label for="base_url">Base URL</Label>
-						<Input type="text" name="base_url" onChange={this.updateBaseURL} value={this.props.base_url}/>
-					</FormGroup>
-					*/}
-					<Button onClick={this.submit}>Login</Button>
-				</Form>
-			</div>
+					</Grid>
+
+					<Grid item xs={12}>
+						<TextField
+							id="password"
+							name="password"
+							type="password"
+							label="Password"
+							value={this.state.password}
+							onChange={this.update}
+							margin="normal"
+							variant="outlined"
+							fullWidth
+						/>
+					</Grid>
+
+					<Grid item xs={12} align='center'>
+						<Button variant='contained' onClick={this.submit}>Login</Button>
+					</Grid>
+				</Grid>
 		);
 	}
 };

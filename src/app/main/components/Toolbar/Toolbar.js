@@ -7,7 +7,7 @@ import {
 	NavLink,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/logo.svg';
+import logo from '../../../assets/logo.svg';
 
 export default class Example extends React.Component {
 	state = {
