@@ -2,17 +2,16 @@ const navigationConfig = [
     {
         'id'      : 'applications',
         'title'   : 'Applications',
-        'type'    : 'group',
+        'type'    : 'item',
         'icon'    : 'apps',
-        'children': [
-            {
-                'id'   : 'example-component',
-                'title': 'Example',
-                'type' : 'item',
-                'icon' : 'whatshot',
-                'url'  : '/example'
-            }
-        ]
+        'url'     : '/users'
+    },
+    {
+        'id'      : 'events',
+        'title'   : 'Events',
+        'type'    : 'item',
+        'icon'    : 'apps',
+        'url'     : '/events'
     }
 ];
 

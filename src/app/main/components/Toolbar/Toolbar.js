@@ -25,6 +25,7 @@ export default class Example extends React.Component {
 	};
 
 	render() {
+		return <></>
 		return (
 			<div>
 				<Navbar color="light" light expand="md">
