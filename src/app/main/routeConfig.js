@@ -27,15 +27,38 @@ export const routeConfig = {
         {
             path    : '/event/:id',
             component: withAuth(PageEventDetails)
-        },
-        {
-            path    : '/',
-            component: PageLogin
-        },
+        }
+    ]
+};
+
+export const loginConfig = {
+    settings: {
+        layout: {
+            config: {
+                navbar        : {
+                    display: false
+                },
+                toolbar       : {
+                    display: false
+                },
+                footer        : {
+                    display: false
+                },
+                leftSidePanel : {
+                    display: false
+                },
+                rightSidePanel: {
+                    display: false
+                }
+            }
+        }
+    },
+    
+    routes  : [
         {
             path     : '/login',
             component: PageLogin
-        }
+        },
     ]
 };
 

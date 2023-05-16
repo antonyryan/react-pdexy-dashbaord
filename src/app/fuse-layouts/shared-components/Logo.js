@@ -2,6 +2,7 @@ import React from 'react';
 import {Typography} from '@material-ui/core';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/styles';
+import logo from '../../../assets/logo.svg';
 
 const useStyles = makeStyles(theme => ({
     root      : {
@@ -32,7 +33,7 @@ function Logo()
 
     return (
         <div className={clsx(classes.root, "flex items-center")}>
-            <img className="logo-icon" src="assets/images/logos/fuse.svg" alt="logo"/>
+            <img className="logo-icon" src={logo} alt="logo"/>
             <Typography className="text-16 ml-12 font-light logo-text" color="textPrimary">FUSE</Typography>
             <div className={clsx(classes.reactBadge, "react-badge flex items-center ml-12 mr-8 py-4 px-8 rounded")}>
                 <img
