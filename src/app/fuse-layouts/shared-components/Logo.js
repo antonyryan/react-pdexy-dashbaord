@@ -9,8 +9,8 @@ import logo from '../../assets/logo.svg';
 const useStyles = makeStyles(theme => ({
     root      : {
         '& .logo-icon'                : {
-            width     : 24,
-            height    : 24,
+            width     : 48,
+            height    : 48,
             transition: theme.transitions.create(['width', 'height'], {
                 duration: theme.transitions.duration.shortest,
                 easing  : theme.transitions.easing.easeInOut
@@ -35,9 +35,9 @@ function Logo()
 
     return (
         <div className={clsx(classes.root, "flex items-center")}>
-            <Link component={RouterLink} to="/dashboard">
+            <Link component={RouterLink} to="/dashboard" className='flex items-center'>
                 <img className="logo-icon" src={logo} alt="logo"/>
-                Pyxie
+                <span className='ml-5'>Pyxie</span>
             </Link>
         </div>
     );

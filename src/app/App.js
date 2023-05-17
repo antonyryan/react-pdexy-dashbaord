@@ -13,11 +13,8 @@ import {StylesProvider, jssPreset, createGenerateClassName} from '@material-ui/s
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 import 'react-geosuggest/module/geosuggest.css';
 import 'react-datetime/css/react-datetime.css';
-import './assets/dark.min.css';
 import './assets/app.css';
 import './assets/sortable.css';
 

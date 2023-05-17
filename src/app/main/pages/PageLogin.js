@@ -11,18 +11,14 @@ class PageLogin extends React.Component
 	render ()
 	{
 		return (
-			<Container>
-				<Row>
-					<Col md={{ offset: 4, size: 4 }}>
-						<img src={logo} alt="Pyxie Logo" className="img-responsive" />
-					</Col>
-				</Row>
-				<Row>
-					<Col md={{ offset: 3, size: 6 }} >
-						<Login />
-					</Col>
-				</Row>
-			</Container>
+			<div className='m-auto p-10'>
+				<div className='text-center'>
+					<img src={logo} alt="Pyxie Logo" className="img-responsive w-1/3"/>
+				</div>
+				<div>
+					<Login />
+				</div>
+			</div>
 		);
 	}
 }

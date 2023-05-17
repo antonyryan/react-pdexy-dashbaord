@@ -1,16 +1,16 @@
 const navigationConfig = [
     {
         'id'      : 'applications',
-        'title'   : 'Applications',
+        'title'   : 'Users',
         'type'    : 'item',
-        'icon'    : 'apps',
+        'icon'    : 'supervisor_account',
         'url'     : '/users'
     },
     {
         'id'      : 'events',
         'title'   : 'Events',
         'type'    : 'item',
-        'icon'    : 'apps',
+        'icon'    : 'event',
         'url'     : '/events'
     }
 ];

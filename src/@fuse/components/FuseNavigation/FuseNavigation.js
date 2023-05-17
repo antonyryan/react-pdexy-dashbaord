@@ -87,12 +87,12 @@ function FuseNavigation(props)
             {
                 return (
                     <React.Fragment>
-                        <Hidden lgUp>
+                        {/* <Hidden lgUp>
                             {verticalNav}
                         </Hidden>
-                        <Hidden mdDown>
+                        <Hidden mdDown> */}
                             {horizontalNav}
-                        </Hidden>
+                        {/* </Hidden> */}
                     </React.Fragment>
                 )
             }

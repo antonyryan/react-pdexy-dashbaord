@@ -110,9 +110,9 @@ return;
 			return <div>Loading...</div>;
 
 		return (
-		<form onSubmit={this.submit}>
+		<form onSubmit={this.submit} className='m-48'>
 			<input type="hidden" name="id" value={this.state.id} />
-			<Grid container spacing={2} className='my-5'>
+			<Grid container spacing={2}>
 				<Grid item xs={12}>
 					<TextField
 						id="name"
