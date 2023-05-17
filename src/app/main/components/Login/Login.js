@@ -42,7 +42,7 @@ class Login extends React.Component {
 	render () 
 	{
 		return (
-				<Grid container>
+				<Grid container spacing={2}>
 					<Grid item xs={12}>
 						<TextField
 							id="email"
@@ -51,7 +51,7 @@ class Login extends React.Component {
 							value={this.state.email}
 							onChange={this.update}
 							margin="normal"
-							variant="outlined"
+							// variant="outlined"
 							fullWidth
 						/>
 					</Grid>
@@ -65,7 +65,7 @@ class Login extends React.Component {
 							value={this.state.password}
 							onChange={this.update}
 							margin="normal"
-							variant="outlined"
+							// variant="outlined"
 							fullWidth
 						/>
 					</Grid>
