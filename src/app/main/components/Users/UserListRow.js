@@ -1,18 +1,22 @@
 import React from 'react';
+
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+
 import { connect } from 'react-redux';
 
 class UserListRow extends React.Component {
 	render ()
 	{
 		return (
-			<tr>
-				<td></td>
-				<td>{this.props.email}</td>
-				<td>{this.props.name}</td>
-				<td>{this.props.lastname}</td>
-				<td>{this.props.phone}</td>
-				<td>ACTIONS</td>
-			</tr>
+			<TableRow>
+				<TableCell/>
+				<TableCell>{this.props.email}</TableCell>
+				<TableCell>{this.props.name}</TableCell>
+				<TableCell>{this.props.lastname}</TableCell>
+				<TableCell>{this.props.phone}</TableCell>
+				<TableCell>ACTIONS</TableCell>
+			</TableRow>
 		);
 	}
 };

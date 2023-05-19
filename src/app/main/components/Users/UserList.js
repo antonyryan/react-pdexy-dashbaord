@@ -1,7 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Table} from 'reactstrap';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 import { users_list } from './actions';
 
@@ -26,29 +30,30 @@ class UserList extends React.Component {
 	render () 
 	{
 		return (
-			<Table striped bordered>
-			<tbody>
-				<tr>
-					<th>
-					</th>
-					<th>
-						email
-					</th>
-					<th>
-						First name
-					</th>
-					<th>
-						Last name
-					</th>
-					<th>
-						Phone
-					</th>
-					<th>
-						Actions
-					</th>
-				</tr>
-				{this.render_rows ()}
-			</tbody>
+			<Table>
+				<TableHead>
+					<TableRow>
+						<TableCell/>
+						<TableCell>
+							Email
+						</TableCell>
+						<TableCell>
+							First name
+						</TableCell>
+						<TableCell>
+							Last name
+						</TableCell>
+						<TableCell>
+							Phone
+						</TableCell>
+						<TableCell>
+							Actions
+						</TableCell>
+					</TableRow>
+				</TableHead>
+				<TableBody>
+					{this.render_rows ()}
+				</TableBody>
 			</Table>
 		);
 	}
