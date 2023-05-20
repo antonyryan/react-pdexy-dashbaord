@@ -1,9 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Row, Col, FormGroup, Label, Input} from 'reactstrap';
-
-import DateTime from 'react-datetime';
 import GMapMap from '../GMap/GMapMap';
 
 import {KeyboardDateTimePicker} from "@material-ui/pickers";
@@ -92,7 +89,7 @@ class EventForm extends React.Component
 	submit = ( ev ) =>
 	{
 		ev.preventDefault ();
-return;
+
 		const dct = { ...this.state };
 
 		dct.start = new Date ( dct.start ).getTime ();

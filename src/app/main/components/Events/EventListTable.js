@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
-import { Button } from 'reactstrap';
+import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
+import history from '@history';
+import Grid from '@material-ui/core/Grid';
 import { event_close, event_reopen, event_start_editing, event_oldmode } from './actions';
 
-import SortableTbl from 'react-sort-search-table';
+import MUIDataTable from "mui-datatables";
 
-class ActionButtons extends React.Component {
+const ActionButtons = connect()(class extends React.Component {
 	close = ( id ) =>
 	{
 		this.props.dispatch ( event_close ( id ) );
@@ -28,66 +30,86 @@ class ActionButtons extends React.Component {
 		this.props.dispatch ( event_oldmode ( id ) );
 	}
 
+	handleDetail = evt => e => {
+		e.preventDefault();
+		history.push(evt)
+	}
+
 	render () 
 	{
 		const event = this.props.rowData;
 
 		const evt = `/event/${event._id}`;
 		return (
-				<td>
-					<Button color="secondary" tag={Link} to={evt}>Details</Button>
-					{ ' ' }
-					{ event.status < 3 ? (
-						<Button color="danger" onClick={ () => this.close ( event._id )}>Close</Button>
-					) : null }
-					{ ' ' }
-					{ event.status === 3 ? (
-						<Button color="primary" onClick={ () => this.reopen ( event._id )}>Re-open</Button>
-					) : null }
-					{ ' ' }
-					{ event.status === 3 ? (
-						<Button color="warning" onClick={ () => this.start_edit ( event._id )}>Start Edit</Button>
-					) : null }
-					{ ' ' }
-					<Button color="success" onClick={ () => this.oldmode ( event._id )}>Download</Button>
-				</td>
+				<Grid container spacing={1}>
+					<Grid item>
+						<Button variant='outlined' href={evt} onClick={this.handleDetail(evt)}>Details</Button>
+					</Grid>
+					{ event.status < 3 && (
+						<Grid item>
+							<Button variant='outlined' color="secondary" onClick={ () => this.close ( event._id )}>Close</Button>
+						</Grid>
+					)}
+					{ event.status === 3 && (
+						<Grid item>
+							<Button variant='outlined' color="primary" onClick={ () => this.reopen ( event._id )}>Re-open</Button>
+						</Grid>
+					)}
+					{ event.status === 3 && (
+						<Grid item>
+							<Button variant='outlined' color="primary" onClick={ () => this.start_edit ( event._id )}>Start Edit</Button>
+						</Grid>
+					)}
+					<Grid item>
+						<Button variant='outlined' color='primary' onClick={ () => this.oldmode ( event._id )}>Download</Button>
+					</Grid>
+				</Grid>
 		);
 	}
-}
+})
 
 class EventListTable extends React.Component {
-	cols = [
-		"name",
-		"descr",
-		"range",
-		"status",
-		"tags",
-		"actions"
+
+	columns = [
+		{ name: 'name', label: "Label" },
+		{ name: 'descr', label: "Description" },
+		{ name: 'range', label: "Range" },
+		{ name: 'status', label: "Status" },
+		{ name: 'tags', label: "Tags" },
+		{
+			name: 'actions',
+			label: "Actions",
+			options: {
+				customBodyRender: value => <ActionButtons rowData={value}/>
+			}
+		},
 	];
 
-	head = [
-		"Name",
-		"Description",
-		"Range",
-		"Status",
-		"Tags",
-		"Actions"
-	];
+	options = {
+		filter: false,
+		search: false,
+		download: false,
+		print: false,
+		viewColumns: false,
+		rowsPerPageOptions: [10, 25, 50, 100],
+		selectableRows: 'none',
+		responsive: "scroll"
+	};
 
 	render ()
 	{
-		const rows = this.props.rows.map ( ( r ) => r.event );
-		console.log ( "ROWS: ", rows.length );
+		const rows = this.props.rows.map ( ({event: { name, descr, range, status, tags, _id }}) => ({
+			name, descr, range, status, tags, actions: { status, _id }
+		}) );
+
+
 		return (
-			<SortableTbl 
-				tblData={rows} 
-				tHead={this.head} 
-				dKey={this.cols} 
-				search={false} 
-				defaultCSS={false} 
-				customTd={[
-					{ custd: ActionButtons, keyItem: "actions" }
-				]}
+			<MUIDataTable
+				title={"Events"}
+				data={rows}
+				columns={this.columns}
+				options={this.options}
+				className={'mt-24'}
 			/>
 		);
 	}

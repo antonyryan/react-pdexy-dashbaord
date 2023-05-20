@@ -152,6 +152,11 @@ const themesConfig = {
                 dark        : '#c73840',
                 contrastText: '#fff'
             }
+        },
+        typography: {
+            button: {
+                textTransform: "none"
+            }
         }
     }
 };

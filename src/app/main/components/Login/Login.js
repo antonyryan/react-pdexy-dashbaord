@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import { withRouter } from 'react-router-dom';
 
-import { Form, FormGroup, Label, Input } from 'reactstrap';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
