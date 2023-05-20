@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { Table, Col } from 'reactstrap';
-
+import MUIDataTable from "mui-datatables";
 import UserListRow from './UserListRow';
 
 class ContributorsTable extends React.Component 
@@ -36,31 +36,25 @@ class ContributorsTable extends React.Component
 
 	render ()
 	{
+		const options = {
+			filter: false,
+			search: false,
+			download: false,
+			print: false,
+			viewColumns: false,
+			selectableRows: 'none',
+		};
+		
+		const data = this.props.event && this.props.event.clips
+			? this.props.event.contributors.map(u => ([u.email, u.name, u.lastname, u.phone]))
+			: []
+
 		return (
-			<Table striped bordered>
-			<tbody>
-				<tr>
-					<th>
-					</th>
-					<th>
-						email
-					</th>
-					<th>
-						First name
-					</th>
-					<th>
-						Last name
-					</th>
-					<th>
-						Phone
-					</th>
-					<th>
-						Actions
-					</th>
-				</tr>
-				{this.users_list ()}
-			</tbody>
-			</Table>
+			<MUIDataTable
+				data={data}
+				columns={['Email', 'First Name', 'Last Name', 'Phone']}
+				options={options}
+			/>
 		);
 	}
 };

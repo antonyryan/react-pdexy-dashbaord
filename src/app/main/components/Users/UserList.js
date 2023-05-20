@@ -1,11 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import MUIDataTable from "mui-datatables";
+import Box from "@material-ui/core/Box";
 
 import { users_list } from './actions';
 
@@ -29,32 +26,24 @@ class UserList extends React.Component {
 
 	render () 
 	{
+		const options = {
+			filter: false,
+			search: false,
+			download: false,
+			print: false,
+			viewColumns: false,
+			selectableRows: 'none',
+		};
+
 		return (
-			<Table>
-				<TableHead>
-					<TableRow>
-						<TableCell/>
-						<TableCell>
-							Email
-						</TableCell>
-						<TableCell>
-							First name
-						</TableCell>
-						<TableCell>
-							Last name
-						</TableCell>
-						<TableCell>
-							Phone
-						</TableCell>
-						<TableCell>
-							Actions
-						</TableCell>
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{this.render_rows ()}
-				</TableBody>
-			</Table>
+			<Box p={3}>
+				<MUIDataTable
+					title={"Users"}
+					data={this.props.users.map(u => ([u.email, u.name, u.lastname, u.phone]))}
+					columns={['Email', 'First Name', 'Last Name', 'Phone']}
+					options={options}
+				/>
+			</Box>
 		);
 	}
 }

@@ -107,7 +107,7 @@ class EventForm extends React.Component
 			return <div>Loading...</div>;
 
 		return (
-		<form onSubmit={this.submit} className='m-48'>
+		<form onSubmit={this.submit}>
 			<input type="hidden" name="id" value={this.state.id} />
 			<Grid container spacing={2}>
 				<Grid item xs={12}>
@@ -192,7 +192,7 @@ class EventForm extends React.Component
 						label="Start Date"
 						value={this.state.start}
 						onChange={v => this.udpate_date ('start', v )}
-						disablePast
+						// disablePast
 						fullWidth
 						showTodayButton
 						format="yyyy/MM/dd HH:mm"
@@ -204,7 +204,7 @@ class EventForm extends React.Component
 						label="Start Date"
 						value={this.state.end}
 						onChange={v => this.udpate_date ('end', v )}
-						disablePast
+						// disablePast
 						fullWidth
 						showTodayButton
 						format="yyyy/MM/dd HH:mm"

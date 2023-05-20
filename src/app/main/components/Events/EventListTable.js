@@ -43,25 +43,60 @@ const ActionButtons = connect()(class extends React.Component {
 		return (
 				<Grid container spacing={1}>
 					<Grid item>
-						<Button variant='outlined' href={evt} onClick={this.handleDetail(evt)}>Details</Button>
+						<Button
+							variant='outlined'
+							size='small'
+							href={evt}
+							onClick={this.handleDetail(evt)}
+						>
+							Details
+						</Button>
 					</Grid>
 					{ event.status < 3 && (
 						<Grid item>
-							<Button variant='outlined' color="secondary" onClick={ () => this.close ( event._id )}>Close</Button>
+							<Button
+								variant='outlined'
+								size='small'
+								color="secondary"
+								onClick={ () => this.close ( event._id )}
+							>
+								Close
+							</Button>
 						</Grid>
 					)}
 					{ event.status === 3 && (
 						<Grid item>
-							<Button variant='outlined' color="primary" onClick={ () => this.reopen ( event._id )}>Re-open</Button>
+							<Button
+								variant='outlined'
+								size='small'
+								color="primary"
+								onClick={ () => this.reopen ( event._id )}
+							>
+								Re-open
+							</Button>
 						</Grid>
 					)}
 					{ event.status === 3 && (
 						<Grid item>
-							<Button variant='outlined' color="primary" onClick={ () => this.start_edit ( event._id )}>Start Edit</Button>
+							<Button
+								variant='outlined'
+								size='small'
+								color="primary"
+								onClick={ () => this.start_edit ( event._id )}
+							>
+								Start Edit
+							</Button>
 						</Grid>
 					)}
 					<Grid item>
-						<Button variant='outlined' color='primary' onClick={ () => this.oldmode ( event._id )}>Download</Button>
+						<Button
+							variant='outlined'
+							size='small'
+							color='primary'
+							onClick={ () => this.oldmode ( event._id )}
+						>
+							Download
+						</Button>
 					</Grid>
 				</Grid>
 		);
@@ -93,7 +128,7 @@ class EventListTable extends React.Component {
 		viewColumns: false,
 		rowsPerPageOptions: [10, 25, 50, 100],
 		selectableRows: 'none',
-		responsive: "scroll"
+		// responsive: "scroll"
 	};
 
 	render ()
