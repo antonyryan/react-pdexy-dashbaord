@@ -37,7 +37,13 @@ function Logo()
         <div className={clsx(classes.root, "flex items-center")}>
             <Link component={RouterLink} to="/dashboard" className='flex items-center'>
                 <img className="logo-icon" src={logo} alt="logo"/>
-                <span className='ml-5'>Pyxie</span>
+                <Typography
+                    variant="h5"
+                    component="span"
+                    className='ml-5 font-bold text-white'
+                >
+                    Pyxie
+                </Typography>
             </Link>
         </div>
     );
