@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import GMapMap from '../GMap/GMapMap';
 
 import {KeyboardDateTimePicker} from "@material-ui/pickers";
+import Paper from '@material-ui/core/Paper';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
@@ -107,123 +108,125 @@ class EventForm extends React.Component
 			return <div>Loading...</div>;
 
 		return (
-		<form onSubmit={this.submit}>
-			<input type="hidden" name="id" value={this.state.id} />
-			<Grid container spacing={2}>
-				<Grid item xs={12}>
-					<TextField
-						id="name"
-						label="Event Name"
-						name="name"
-						value={this.state.name}
-						onChange={this.update}
-						fullWidth
-					/>
-				</Grid>
-				<Grid item xs={12}>
-					<TextField
-						id="descr"
-						label="Description"
-						name="descr"
-						value={this.state.descr}
-						onChange={this.update}
-						multiline={true}
-						placeholder="Event description"
-						fullWidth
-					/>
-				</Grid>
+			<Paper className='p-24'>
+				<form onSubmit={this.submit}>
+					<input type="hidden" name="id" value={this.state.id} />
+					<Grid container spacing={2}>
+						<Grid item xs={12}>
+							<TextField
+								id="name"
+								label="Event Name"
+								name="name"
+								value={this.state.name}
+								onChange={this.update}
+								fullWidth
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
+								id="descr"
+								label="Description"
+								name="descr"
+								value={this.state.descr}
+								onChange={this.update}
+								multiline={true}
+								placeholder="Event description"
+								fullWidth
+							/>
+						</Grid>
 
-				<Grid item xs={12} sm={4}>
-					<FormControl fullWidth>
-						<InputLabel htmlFor="kind">Kind</InputLabel>
-						<Select
-							value={this.state.kind}
-							onChange={this.update}
-							inputProps={{ name: 'kind', id: 'kind' }}
-						>
-							<MenuItem value="public">Public</MenuItem>
-							<MenuItem value="private">Private</MenuItem>
-							<MenuItem value="internal">Internal</MenuItem>
-						</Select>
-					</FormControl>
-				</Grid>
-				<Grid item xs={12} sm={4}>
-					<FormControl fullWidth>
-						<InputLabel htmlFor="topic">Topic</InputLabel>
-						<Select
-							value={this.state.topic}
-							onChange={this.update}
-							inputProps={{ name: 'topic', id: 'topic' }}
-						>
-							<MenuItem value="generic">Generic</MenuItem>
-							<MenuItem value="life">Life</MenuItem>
-							<MenuItem value="sport">Sport</MenuItem>
-							<MenuItem value="movie">Movie</MenuItem>
-							<MenuItem value="music">Music</MenuItem>
-						</Select>
-					</FormControl>
-				</Grid>
-				<Grid item xs={12} sm={4}>
-					<TextField
-						label="Coupon"
-						name="coupon"
-						value={this.state.coupon}
-						onChange={this.update}
-						placeholder="Event Coupon"
-						fullWidth
-					/>
-				</Grid>
+						<Grid item xs={12} sm={4}>
+							<FormControl fullWidth>
+								<InputLabel htmlFor="kind">Kind</InputLabel>
+								<Select
+									value={this.state.kind}
+									onChange={this.update}
+									inputProps={{ name: 'kind', id: 'kind' }}
+								>
+									<MenuItem value="public">Public</MenuItem>
+									<MenuItem value="private">Private</MenuItem>
+									<MenuItem value="internal">Internal</MenuItem>
+								</Select>
+							</FormControl>
+						</Grid>
+						<Grid item xs={12} sm={4}>
+							<FormControl fullWidth>
+								<InputLabel htmlFor="topic">Topic</InputLabel>
+								<Select
+									value={this.state.topic}
+									onChange={this.update}
+									inputProps={{ name: 'topic', id: 'topic' }}
+								>
+									<MenuItem value="generic">Generic</MenuItem>
+									<MenuItem value="life">Life</MenuItem>
+									<MenuItem value="sport">Sport</MenuItem>
+									<MenuItem value="movie">Movie</MenuItem>
+									<MenuItem value="music">Music</MenuItem>
+								</Select>
+							</FormControl>
+						</Grid>
+						<Grid item xs={12} sm={4}>
+							<TextField
+								label="Coupon"
+								name="coupon"
+								value={this.state.coupon}
+								onChange={this.update}
+								placeholder="Event Coupon"
+								fullWidth
+							/>
+						</Grid>
 
-				<Grid item xs={12}>
-					<TextField
-						id="notify"
-						label="Notify"
-						name="notify"
-						value={this.state.notify}
-						onChange={this.update}
-						type="email"
-						placeholder="Notify Email"
-						fullWidth
-					/>
-				</Grid>
-				<Grid item xs={12} sm={6} md={4}>
-					<KeyboardDateTimePicker
-						ampm={false}
-						label="Start Date"
-						value={this.state.start}
-						onChange={v => this.udpate_date ('start', v )}
-						// disablePast
-						fullWidth
-						showTodayButton
-						format="yyyy/MM/dd HH:mm"
-					/>
-				</Grid>
-				<Grid item xs={12} sm={6} md={4}>
-					<KeyboardDateTimePicker
-						ampm={false}
-						label="Start Date"
-						value={this.state.end}
-						onChange={v => this.udpate_date ('end', v )}
-						// disablePast
-						fullWidth
-						showTodayButton
-						format="yyyy/MM/dd HH:mm"
-					/>
-				</Grid>
-				<Grid item xs={12}>
-					<GMapMap
-						location={this.state.location}
-						range={this.state.event ? this.state.range : 0}
-						location_update={this.state.event ? null : this.location_update}
-					/>
-				</Grid>
-				<Grid item align='center' xs={12}>
-					<Button variant='contained' type='submit'>
-						{ this.state.event ? 'Update Event' : 'Create Event' }
-					</Button>
-				</Grid>
-			</Grid>
-		</form>
+						<Grid item xs={12}>
+							<TextField
+								id="notify"
+								label="Notify"
+								name="notify"
+								value={this.state.notify}
+								onChange={this.update}
+								type="email"
+								placeholder="Notify Email"
+								fullWidth
+							/>
+						</Grid>
+						<Grid item xs={12} sm={6} md={4}>
+							<KeyboardDateTimePicker
+								ampm={false}
+								label="Start Date"
+								value={this.state.start}
+								onChange={v => this.udpate_date ('start', v )}
+								// disablePast
+								fullWidth
+								showTodayButton
+								format="yyyy/MM/dd HH:mm"
+							/>
+						</Grid>
+						<Grid item xs={12} sm={6} md={4}>
+							<KeyboardDateTimePicker
+								ampm={false}
+								label="Start Date"
+								value={this.state.end}
+								onChange={v => this.udpate_date ('end', v )}
+								// disablePast
+								fullWidth
+								showTodayButton
+								format="yyyy/MM/dd HH:mm"
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<GMapMap
+								location={this.state.location}
+								range={this.state.event ? this.state.range : 0}
+								location_update={this.state.event ? null : this.location_update}
+							/>
+						</Grid>
+						<Grid item align='center' xs={12}>
+							<Button variant='contained' type='submit'>
+								{ this.state.event ? 'Update Event' : 'Create Event' }
+							</Button>
+						</Grid>
+					</Grid>
+				</form>
+			</Paper>
 		);
 	}
 }

@@ -144,7 +144,7 @@ class EventListTable extends React.Component {
 				data={rows}
 				columns={this.columns}
 				options={this.options}
-				className={'mt-24'}
+				className={'shadow-none'}
 			/>
 		);
 	}

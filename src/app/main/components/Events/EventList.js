@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 
 import { events_list, events_admin_list } from './actions';
 
+import Paper from '@material-ui/core/Paper';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
+import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -59,37 +61,44 @@ class EventsList extends React.Component
 	render () 
 	{
 		return (
-			<div className='m-48'>
-				<Grid container spacing={2}>
-					<Grid item xs={12} sm={6} md={4} lg={3}>
-						<TextField
-							id="name"
-							label="Name"
-							name="name"
-							onChange={e => debounce(this.filter_form, 500)(cloneDeep(e))}
-							fullWidth
-						/>
+			<Box p={3}>
+				<Paper className={'pb-3'}>
+					<Grid container>
+						<Grid item xs={12}>
+							<Grid container spacing={2} className='p-24'>
+								<Grid item xs={12} sm={6} md={4} lg={3}>
+									<TextField
+										id="name"
+										label="Name"
+										name="name"
+										onChange={e => debounce(this.filter_form, 500)(cloneDeep(e))}
+										fullWidth
+									/>
+								</Grid>
+								<Grid item xs={12} sm={6} md={4} lg={3}>
+									<FormControl fullWidth>
+										<InputLabel htmlFor="status">Status</InputLabel>
+										<Select
+											onChange={this.filter_form}
+											value={this.state.status}
+											inputProps={{ name: 'status', id: 'status' }}
+										>
+											<MenuItem value="0">(Any status)</MenuItem>
+											<MenuItem value="1">1</MenuItem>
+											<MenuItem value="2">2</MenuItem>
+											<MenuItem value="3">3</MenuItem>
+											<MenuItem value="4">4</MenuItem>
+											<MenuItem value="5">5</MenuItem>
+										</Select>
+									</FormControl>
+								</Grid>
+							</Grid>
+						</Grid>
 					</Grid>
-					<Grid item xs={12} sm={6} md={4} lg={3}>
-						<FormControl fullWidth>
-							<InputLabel htmlFor="status">Status</InputLabel>
-							<Select
-								onChange={this.filter_form}
-								value={this.state.status}
-								inputProps={{ name: 'status', id: 'status' }}
-							>
-								<MenuItem value="0">(Any status)</MenuItem>
-								<MenuItem value="1">1</MenuItem>
-								<MenuItem value="2">2</MenuItem>
-								<MenuItem value="3">3</MenuItem>
-								<MenuItem value="4">4</MenuItem>
-								<MenuItem value="5">5</MenuItem>
-							</Select>
-						</FormControl>
-					</Grid>
-				</Grid>
-				<EventListTable rows={this.props.events} />
-			</div>
+					
+					<EventListTable rows={this.props.events} />
+				</Paper>
+			</Box>
 		);
 	}
 }

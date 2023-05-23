@@ -6,6 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Box from '@material-ui/core/Box';
 import Tab from '@material-ui/core/Tab';
 import AppBar from '@material-ui/core/AppBar';
+import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
@@ -107,17 +108,19 @@ class PageEventDetails extends React.Component
 						<EventDetails event={this.event} />
 					</TabPanel>
 					<TabPanel value={this.state.active_tab} index={1}>
-						<Button onClick={() => this.setState({show_map: true})}>Maps</Button>
-						<Button onClick={() => this.setState({show_map: false})}>Clips</Button>
-						{this.state.show_map === false
-							? <ClipTable event={this.event} />
-							: <ClipMap
-								event={this.event}
-								range={0}
-								location={this.event.location}
-								eyes={[]}
-							/>
-						}
+						<Paper className='p-24'>
+							<Button onClick={() => this.setState({show_map: true})}>Maps</Button>
+							<Button onClick={() => this.setState({show_map: false})}>Clips</Button>
+							{this.state.show_map === false
+								? <ClipTable event={this.event} />
+								: <ClipMap
+									event={this.event}
+									range={0}
+									location={this.event.location}
+									eyes={[]}
+								/>
+							}
+						</Paper>
 					</TabPanel>
 					<TabPanel value={this.state.active_tab} index={2}>
 						<ContributorsTable event={this.event} />
