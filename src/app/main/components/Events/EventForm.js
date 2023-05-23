@@ -42,13 +42,15 @@ class EventForm extends React.Component
 
 		if ( ev )
 		{
+			const topic = topic2str ( ev.topic );
+
 			this.setState ( { 
 				name: ev.name,
 				descr: ev.descr,
 				start: dateFromTimestamp ( ev.start ),
 				end: dateFromTimestamp ( ev.end ),
 				range: ev.range,
-				topic: topic2str ( ev.topic ),
+				topic: topic === 'no_topic' ? '' : topic,
 				kind: kind2str ( ev.kind ),
 				coupon: ev.tags,
 				location: ev.location ? ev.location : { lat: 0, lng: 0, address: '' },

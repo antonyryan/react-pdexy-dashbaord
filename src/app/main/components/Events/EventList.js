@@ -11,6 +11,8 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import { status2str } from './helpers';
+
 
 import { debounce, cloneDeep } from 'lodash';
 import EventListRow from './EventListRow';
@@ -87,11 +89,11 @@ class EventsList extends React.Component
 											inputProps={{ name: 'status', id: 'status' }}
 										>
 											<MenuItem value="0">(Any status)</MenuItem>
-											<MenuItem value="1">1</MenuItem>
-											<MenuItem value="2">2</MenuItem>
-											<MenuItem value="3">3</MenuItem>
-											<MenuItem value="4">4</MenuItem>
-											<MenuItem value="5">5</MenuItem>
+											{Array(5).fill(0).map((val, key) => (
+												<MenuItem value={key + 1} key={key}>
+													{status2str(key + 1)}
+												</MenuItem>
+											))}
 										</Select>
 									</FormControl>
 								</Grid>

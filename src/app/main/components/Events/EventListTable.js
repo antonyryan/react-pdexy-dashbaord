@@ -7,6 +7,7 @@ import history from '@history';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 
+import { status2str } from './helpers';
 import {
 	event_close,
 	event_reopen,
@@ -129,6 +130,7 @@ class EventListTable extends React.Component {
 			name: 'actions',
 			label: "Actions",
 			options: {
+				sort: false,
 				customBodyRender: value => <ActionButtons rowData={value}/>
 			}
 		},
@@ -148,7 +150,12 @@ class EventListTable extends React.Component {
 	render ()
 	{
 		const rows = this.props.rows.map ( ({event: { name, descr, range, status, tags, _id }}) => ({
-			name, descr, range, status, tags: '', actions: { status, _id }
+			name,
+			descr,
+			range,
+			status: status2str(status),
+			tags: '',
+			actions: { status, _id }
 		}) );
 
 
