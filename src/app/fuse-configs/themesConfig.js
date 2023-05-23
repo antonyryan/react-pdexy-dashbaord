@@ -141,6 +141,9 @@ const themesConfig = {
     slate      : {
         palette: {
             type     : 'dark',
+            background: {
+                default: '#35352e'
+            },
             primary  : {
                 light: '#86fff7',
                 main : '#4ecdc4',

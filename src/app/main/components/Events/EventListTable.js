@@ -1,13 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
 import history from '@history';
 import Grid from '@material-ui/core/Grid';
-import { event_close, event_reopen, event_start_editing, event_oldmode } from './actions';
+import { withStyles } from '@material-ui/core/styles';
+
+import {
+	event_close,
+	event_reopen,
+	event_start_editing,
+	event_oldmode
+} from './actions';
 
 import MUIDataTable from "mui-datatables";
+
+
+const styles = {
+	tableHeight: {
+		maxHeight: 'calc(100vh - 340px)'
+	}
+}
 
 const ActionButtons = connect()(class extends React.Component {
 	close = ( id ) =>
@@ -128,7 +142,7 @@ class EventListTable extends React.Component {
 		viewColumns: false,
 		rowsPerPageOptions: [10, 25, 50, 100],
 		selectableRows: 'none',
-		// responsive: "scroll"
+		responsive: "scroll"
 	};
 
 	render ()
@@ -145,9 +159,13 @@ class EventListTable extends React.Component {
 				columns={this.columns}
 				options={this.options}
 				className={'shadow-none'}
+				classes={{responsiveScroll: this.props.classes.tableHeight}}
 			/>
 		);
 	}
 };
 
-export default connect () ( EventListTable );
+export default compose(
+	connect(),
+	withStyles(styles)
+)(EventListTable);

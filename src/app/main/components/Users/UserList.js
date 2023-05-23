@@ -1,12 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import MUIDataTable from "mui-datatables";
+import { withStyles } from '@material-ui/core/styles';
+
 import Box from "@material-ui/core/Box";
 
 import { users_list } from './actions';
 
 import UserListRow from './UserListRow';
+
+
+const styles = {
+	tableHeight: {
+		maxHeight: 'calc(100vh - 240px)'
+	}
+}
 
 class UserList extends React.Component {
 	componentDidMount = () => {
@@ -23,7 +33,7 @@ class UserList extends React.Component {
 			);
 		} );
 	}
-
+	
 	render () 
 	{
 		const options = {
@@ -32,7 +42,9 @@ class UserList extends React.Component {
 			download: false,
 			print: false,
 			viewColumns: false,
+			rowsPerPageOptions: [10, 25, 50, 100],
 			selectableRows: 'none',
+			responsive: 'scroll'
 		};
 
 		return (
@@ -42,6 +54,7 @@ class UserList extends React.Component {
 					data={this.props.users.map(u => ([u.email, u.name, u.lastname, u.phone]))}
 					columns={['Email', 'First Name', 'Last Name', 'Phone']}
 					options={options}
+					classes={{responsiveScroll: this.props.classes.tableHeight}}
 				/>
 			</Box>
 		);
@@ -54,4 +67,7 @@ const mapStateToProps = ( state ) => {
 	};
 };
 
-export default connect ( mapStateToProps ) ( UserList );
+export default compose(
+	connect ( mapStateToProps ),
+	withStyles(styles)
+)( UserList );

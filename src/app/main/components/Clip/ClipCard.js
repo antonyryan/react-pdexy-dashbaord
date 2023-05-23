@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 
 import { clip_info } from './actions';
 
-import { Card, CardBody, CardTitle, CardText, Button } from 'reactstrap';
+import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 import ReactPlayer from 'react-player'
 
@@ -27,12 +29,40 @@ class ClipCard extends React.Component
 				<CardBody>
 					<CardTitle>Status: {this.props.clip.status} - Length: {this.props.clip.length}</CardTitle>
 					<CardText>
-						{this.props.clip.owner.name} {this.props.clip.owner.lastname}
-						<br />
-						{/* <Button className={'card-clip-button'} color="primary">Video</Button> */}
-						<a className="btn btn-success card-clip-button" href={this.props.clip.video} target="_blank" rel="noopener noreferrer">Download</a> 
-						<Button className={'card-clip-button'} color="info" onClick={ () => this.do_clip_info(this.props.clip)} >Info</Button>
-						<Button className={'card-clip-button'} color="danger">Delete</Button>
+						<div>
+							{this.props.clip.owner.name} {this.props.clip.owner.lastname}
+						</div>
+						<Grid container spacing={1} className='mt-4'>
+							<Grid item>
+								{/* <Button className={'card-clip-button'} color="primary">Video</Button> */}
+								<Button
+									variant='outlined'
+									size='small'
+									href={this.props.clip.video}
+								>
+									Download
+								</Button> 
+							</Grid>
+							<Grid item>
+								<Button
+									variant='outlined'
+									size='small'
+									color='primary'
+									onClick={ () => this.do_clip_info(this.props.clip)}
+								>
+									Info
+								</Button>
+							</Grid>
+							<Grid item>
+								<Button
+									variant='outlined'
+									color='secondary'
+									size='small'
+								>
+									Delete
+								</Button>
+							</Grid>
+						</Grid>
 					</CardText>
 				</CardBody>
 			</Card>

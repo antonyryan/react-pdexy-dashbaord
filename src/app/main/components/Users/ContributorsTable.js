@@ -1,9 +1,19 @@
 import React from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 
-import { Table, Col } from 'reactstrap';
+import { Col } from 'reactstrap';
+import { withStyles } from '@material-ui/core/styles';
 import MUIDataTable from "mui-datatables";
 import UserListRow from './UserListRow';
+
+
+const styles = {
+	tableHeight: {
+		maxHeight: 'calc(100vh - 220px)'
+	}
+}
+
 
 class ContributorsTable extends React.Component 
 {
@@ -41,8 +51,10 @@ class ContributorsTable extends React.Component
 			search: false,
 			download: false,
 			print: false,
+			rowsPerPageOptions: [10, 25, 50, 100],
 			viewColumns: false,
 			selectableRows: 'none',
+			responsive: "scroll"
 		};
 		
 		const data = this.props.event && this.props.event.clips
@@ -54,6 +66,7 @@ class ContributorsTable extends React.Component
 				data={data}
 				columns={['Email', 'First Name', 'Last Name', 'Phone']}
 				options={options}
+				classes={{responsiveScroll: this.props.classes.tableHeight}}
 			/>
 		);
 	}
@@ -65,4 +78,8 @@ const mapStateToProps = ( state ) => {
 	};
 };
 
-export default connect ( mapStateToProps ) ( ContributorsTable );
+
+export default compose(
+	connect ( mapStateToProps ),
+	withStyles(styles)
+)( ContributorsTable );
