@@ -119,6 +119,9 @@ class EventForm extends React.Component
 								name="name"
 								value={this.state.name}
 								onChange={this.update}
+								InputLabelProps={{
+									shrink: true,
+								}}
 								fullWidth
 							/>
 						</Grid>
@@ -131,13 +134,16 @@ class EventForm extends React.Component
 								onChange={this.update}
 								multiline={true}
 								placeholder="Event description"
+								InputLabelProps={{
+									shrink: true,
+								}}
 								fullWidth
 							/>
 						</Grid>
 
 						<Grid item xs={12} sm={4}>
 							<FormControl fullWidth>
-								<InputLabel htmlFor="kind">Kind</InputLabel>
+								<InputLabel shrink htmlFor="kind">Kind</InputLabel>
 								<Select
 									value={this.state.kind}
 									onChange={this.update}
@@ -151,10 +157,11 @@ class EventForm extends React.Component
 						</Grid>
 						<Grid item xs={12} sm={4}>
 							<FormControl fullWidth>
-								<InputLabel htmlFor="topic">Topic</InputLabel>
+								<InputLabel shrink htmlFor="topic">Topic</InputLabel>
 								<Select
 									value={this.state.topic}
 									onChange={this.update}
+									shrink
 									inputProps={{ name: 'topic', id: 'topic' }}
 								>
 									<MenuItem value="generic">Generic</MenuItem>
@@ -172,6 +179,9 @@ class EventForm extends React.Component
 								value={this.state.coupon}
 								onChange={this.update}
 								placeholder="Event Coupon"
+								InputLabelProps={{
+									shrink: true,
+								}}
 								fullWidth
 							/>
 						</Grid>
@@ -185,6 +195,9 @@ class EventForm extends React.Component
 								onChange={this.update}
 								type="email"
 								placeholder="Notify Email"
+								InputLabelProps={{
+									shrink: true,
+								}}
 								fullWidth
 							/>
 						</Grid>

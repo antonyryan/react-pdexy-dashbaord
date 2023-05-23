@@ -72,6 +72,9 @@ class EventsList extends React.Component
 										label="Name"
 										name="name"
 										onChange={e => debounce(this.filter_form, 500)(cloneDeep(e))}
+										InputLabelProps={{
+											shrink: true,
+										}}
 										fullWidth
 									/>
 								</Grid>

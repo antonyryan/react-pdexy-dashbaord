@@ -148,7 +148,7 @@ class EventListTable extends React.Component {
 	render ()
 	{
 		const rows = this.props.rows.map ( ({event: { name, descr, range, status, tags, _id }}) => ({
-			name, descr, range, status, tags, actions: { status, _id }
+			name, descr, range, status, tags: '', actions: { status, _id }
 		}) );
 
 
