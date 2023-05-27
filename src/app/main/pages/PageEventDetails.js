@@ -17,7 +17,11 @@ import ClipTable from '../components/Clip/ClipTable';
 import ClipMap   from '../components/Clip/ClipMap';
 import ContributorsTable from '../components/Users/ContributorsTable';
 
-import { event_set_current, event_oldmode } from '../components/Events/actions';
+import {
+	event_set_current,
+	events_admin_list,
+	event_oldmode
+} from '../components/Events/actions';
 
 
 function TabPanel(props) {
@@ -45,24 +49,37 @@ class PageEventDetails extends React.Component
 		show_map: true
 	};
 
-	event = '';
-
 	componentWillMount = () =>
 	{
 		const event_id = this.props.match.params.id;
 
 		// this.setState ( { event: this.props.details [ event_id ] } );
-		this.event =  this.props.details [ event_id ].event;
+
+		if (this.props.details[event_id]) {
+			this.setState({ event: this.props.details[ event_id ].event });
+		} else {
+			this.props.dispatch ( events_admin_list ( event_id ) );
+		}
 
 // console.log ( "EV2: ", this.props.details [ event_id ] );
 		this.props.dispatch ( event_set_current ( event_id ) );
 	};
 
-	componentDidMount = () =>
+	shouldComponentUpdate = props =>
 	{
 		const event_id = this.props.match.params.id;
+		
+		if (props.details[ event_id ] && !this.props.details[event_id]) {
+			this.setState({ event: props.details[ event_id ].event });
+		}
+		return true;
+	}
 
-		this.setState ( { event: this.props.details [ event_id ], active_tab: 1 } );
+	componentDidMount = () =>
+	{
+		// const event_id = this.props.match.params.id;
+
+		this.setState ( { active_tab: 1 } );
 
 		// this.setState ( { active_tab: 1 } );
 		const e = document.getElementById ( "__my_link" );
@@ -81,6 +98,10 @@ class PageEventDetails extends React.Component
 
 	render ()
 	{
+		if (!this.state.event) {
+			return <div>Loading...</div>
+		}
+
 		return (
 			<>
 				<Toolbar />
@@ -105,25 +126,25 @@ class PageEventDetails extends React.Component
 					onChangeIndex={this.toggle}
 				>
 					<TabPanel value={this.state.active_tab} index={0}>
-						<EventDetails event={this.event} />
+						<EventDetails event={this.state.event} />
 					</TabPanel>
 					<TabPanel value={this.state.active_tab} index={1}>
 						<Paper className='p-24'>
 							<Button onClick={() => this.setState({show_map: true})}>Maps</Button>
 							<Button onClick={() => this.setState({show_map: false})}>Clips</Button>
 							{this.state.show_map === false
-								? <ClipTable event={this.event} />
+								? <ClipTable event={this.state.event} />
 								: <ClipMap
-									event={this.event}
+									event={this.state.event}
 									range={0}
-									location={this.event.location}
+									location={this.state.event.location}
 									eyes={[]}
 								/>
 							}
 						</Paper>
 					</TabPanel>
 					<TabPanel value={this.state.active_tab} index={2}>
-						<ContributorsTable event={this.event} />
+						<ContributorsTable event={this.state.event} />
 					</TabPanel>
 				</SwipeableViews>
 			</>

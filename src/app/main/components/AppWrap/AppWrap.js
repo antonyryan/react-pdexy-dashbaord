@@ -7,6 +7,7 @@ class AppWrap extends React.Component
 {
 	componentDidMount = ( news ) =>
 	{
+		console.log('app wrap')
 		this.props.dispatch ( events_admin_list () );
 	}
 

@@ -36,6 +36,7 @@ class EventForm extends React.Component
 
 	componentDidMount = () =>
 	{
+		console.log('event form')
 		const ev = this.props.event;
 
 		if ( ev ) console.log ( "EV: ", ev, new Date ( parseInt ( ev.start ) * 1000 ) );
