@@ -28,7 +28,7 @@ class ClipCard extends React.Component
 					height='100%' />
 				<CardBody>
 					<CardTitle>Status: {this.props.clip.status} - Length: {this.props.clip.length}</CardTitle>
-					<CardText>
+					<div>
 						<div>
 							{this.props.clip.owner.name} {this.props.clip.owner.lastname}
 						</div>
@@ -63,7 +63,7 @@ class ClipCard extends React.Component
 								</Button>
 							</Grid>
 						</Grid>
-					</CardText>
+					</div>
 				</CardBody>
 			</Card>
 		);

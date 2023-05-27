@@ -130,8 +130,18 @@ class PageEventDetails extends React.Component
 					</TabPanel>
 					<TabPanel value={this.state.active_tab} index={1}>
 						<Paper className='p-24'>
-							<Button onClick={() => this.setState({show_map: true})}>Maps</Button>
-							<Button onClick={() => this.setState({show_map: false})}>Clips</Button>
+							<Button
+								color={this.state.show_map ? 'primary' : 'default'}
+								onClick={() => this.setState({show_map: true})}
+							>
+								Maps
+							</Button>
+							<Button
+								color={!this.state.show_map ? 'primary' : 'default'}
+								onClick={() => this.setState({show_map: false})}
+							>
+								Clips
+							</Button>
 							{this.state.show_map === false
 								? <ClipTable event={this.state.event} />
 								: <ClipMap
