@@ -35,6 +35,7 @@ class Login extends React.Component {
 		evt.preventDefault ();
 
 		this.setState({ doing: true, notify: false });
+		clearTimeout(this.timer);
 
 		this.props.dispatch ( auth_login (
 			this.state.email,
@@ -49,7 +50,7 @@ class Login extends React.Component {
 			notify: true,
 			doing: false
 		}, () => {
-			setTimeout(() => this.setState({ notify: false }), 3000)
+			this.timer = setTimeout(() => this.setState({ notify: false }), 3000)
 		})
 	}
 
