@@ -2,7 +2,7 @@ import axios from '../axios';
 
 import { app_login } from '../App/actions';
 
-export const auth_login = ( email, password, history ) => {
+export const auth_login = ( email, password, history, onLoginFailed ) => {
 	return function ( dispatch ) {
 		axios.post ( 
 			"/api/auth/login", 
@@ -20,7 +20,8 @@ export const auth_login = ( email, password, history ) => {
 
 		.catch ( ( err ) => {
 			console.error ( "ERROR: ", err );
-			dispatch ( err );
+			onLoginFailed();
+			// dispatch ( err );
 		} );
 	};
 };
