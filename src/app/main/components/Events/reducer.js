@@ -81,6 +81,12 @@ export default ( state = { list: [], filters: { name: 'ciao' }, details: {}, cur
 			return { ...state, details, list };
 
 		case "event.create":
+			const created_event = action.payload.event_details;
+			return {
+				...state,
+				details: { ...state.details, [created_event.event._id]: created_event }
+			};
+			
 			return state;   // { ...state, profile_id: action.payload.profile_id };
 
 		case "event.set_current":

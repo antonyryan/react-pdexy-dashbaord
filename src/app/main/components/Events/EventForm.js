@@ -1,21 +1,35 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import GMapMap from '../GMap/GMapMap';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
 import {KeyboardDateTimePicker} from "@material-ui/pickers";
-import Paper from '@material-ui/core/Paper';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import { withStyles } from '@material-ui/core/styles';
 
 import { event_create } from './actions';
 import { kind2str, topic2str } from './helpers';
 import { dateFromTimestamp } from '../../lib/utils';
+
+
+const styles = {
+	spinner: {
+		textAlign: 'center',
+		position: 'absolute',
+		left: 0,
+		top: '10em',
+		width: '100%'
+	}
+}
 
 class EventForm extends React.Component
 {
@@ -31,7 +45,8 @@ class EventForm extends React.Component
 		event: null,
 		ready: false,
 		coupon: '',
-		notify: ''
+		notify: '',
+		loading: false
 	};
 
 	componentDidMount = () =>
@@ -102,7 +117,16 @@ class EventForm extends React.Component
 		// se ce n'è più di uno, la riga qui sotto va ripensata
 		dct.tags  = [ dct.coupon ];
 
-		this.props.dispatch ( event_create ( dct ) );
+		if (this.state.event) {
+			// update event
+		} else {
+			// create event
+			this.setState({loading: true});
+			this.props.dispatch(event_create(
+				dct,
+				() => this.setState({loading: false})	
+			));
+		}
 	}
 
 	render ()
@@ -112,6 +136,14 @@ class EventForm extends React.Component
 
 		return (
 			<Paper className='p-24'>
+				<div className={this.props.classes.spinner}>
+				{ this.state.loading && (
+					<CircularProgress
+						size={64}
+						thickness={2}
+					/>
+				)}
+				</div>
 				<form onSubmit={this.submit}>
 					<input type="hidden" name="id" value={this.state.id} />
 					<Grid container spacing={2}>
@@ -236,7 +268,11 @@ class EventForm extends React.Component
 							/>
 						</Grid>
 						<Grid item align='center' xs={12}>
-							<Button variant='contained' type='submit'>
+							<Button
+								disabled={this.state.loading}
+								variant='contained'
+								type='submit'
+							>
 								{ this.state.event ? 'Update Event' : 'Create Event' }
 							</Button>
 						</Grid>
@@ -247,4 +283,7 @@ class EventForm extends React.Component
 	}
 }
 
-export default connect () ( EventForm );
+export default compose(
+	connect(),
+	withStyles(styles)
+)(EventForm);

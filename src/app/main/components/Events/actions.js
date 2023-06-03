@@ -1,4 +1,5 @@
 import axios from '../axios';
+import history from '@history';
 
 export const events_list = ( name = '', status = '', start = 0, rows = 25 )  => {
 	return function ( dispatch ) {
@@ -68,7 +69,7 @@ export const event_details_clear = () =>
 	};
 };
 
-export const event_create = ( dct ) => {
+export const event_create = ( dct, onError ) => {
 	return function ( dispatch ) {
 		axios.post ( 
 			"/api/event/create", 
@@ -80,7 +81,7 @@ export const event_create = ( dct ) => {
 				payload: { event_details: response.data }
 			} );
 
-			// history.push ( "/dashboard" );
+			history.push ( `/event/${response.data.event._id}` );
 		} )
 
 		.catch ( ( err ) => {

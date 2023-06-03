@@ -33,6 +33,6 @@ export const kind2str = ( kind ) =>
 		case 2: return 'public';
 		case 3: return 'reserved';
 		case 4: return 'internal';
-		default: return'no_kind';
+		default: return '';
 	}
 }
