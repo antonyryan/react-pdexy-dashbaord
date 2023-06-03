@@ -215,30 +215,30 @@ class GMapMap extends React.Component
 						})
 					}
 				</GoogleMapReact>
-				<div className="suggest-container">
-					<div className="text">
-						{this.state.mapApiLoaded && (
+				{this.state.mapApiLoaded && (
+					<div className="suggest-container">
+						<div className="text">
 							<Geosuggest
 								onSuggestSelect={this.location_select}
 								initialValue={this.state.location.address}
 								disabled={!this.state.location_update}
 							/>
-						)}
+						</div>
+						<div className="range">
+							<Input
+								type="number"
+								name="range"
+								id="range"
+								placeholder="Range"
+								min="0"
+								max="9999"
+								onChange={this.update_range}
+								value={this.state.range}
+								disabled={!this.state.location_update}
+							/>
+						</div>
 					</div>
-					<div className="range">
-						<Input
-							type="number"
-							name="range"
-							id="range"
-							placeholder="Range"
-							min="0"
-							max="9999"
-							onChange={this.update_range}
-							value={this.state.range}
-							disabled={!this.state.location_update}
-						/>
-					</div>
-				</div>
+				)}
 			</div>
 		);
 	}
