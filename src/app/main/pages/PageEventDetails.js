@@ -1,4 +1,5 @@
 import React from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import SwipeableViews from 'react-swipeable-views';
@@ -9,6 +10,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Snackbar from '@material-ui/core/Snackbar';
+import { withStyles } from '@material-ui/core/styles';
 
 
 import Toolbar from '../components/Toolbar/Toolbar';
@@ -22,6 +25,17 @@ import {
 	events_admin_list,
 	event_oldmode
 } from '../components/Events/actions';
+
+
+const styles = {
+	snack: {
+		top: 125,
+		'& div': {
+			background: '#424242',
+			color: 'white'
+		}
+	}
+}
 
 
 function TabPanel(props) {
@@ -44,8 +58,9 @@ function TabPanel(props) {
 class PageEventDetails extends React.Component
 {
 	state = {
-		active_tab: 1,
+		active_tab: 0,
 		event: null,
+		event_create: false,
 		show_map: true
 	};
 
@@ -79,9 +94,12 @@ class PageEventDetails extends React.Component
 	{
 		// const event_id = this.props.match.params.id;
 
-		this.setState ( { active_tab: 1 } );
+		this.setState ( { active_tab: 0 } );
+		if (sessionStorage.getItem('event_create')) {
+			this.setState({event_create: true});
+			sessionStorage.removeItem('event_create');
+		}
 
-		// this.setState ( { active_tab: 1 } );
 		const e = document.getElementById ( "__my_link" );
 		if ( e ) e.click ();
 	}
@@ -157,6 +175,18 @@ class PageEventDetails extends React.Component
 						<ContributorsTable event={this.state.event} />
 					</TabPanel>
 				</SwipeableViews>
+
+				<Snackbar
+					anchorOrigin={{
+						vertical: 'top',
+						horizontal: 'center',
+					}}
+					open={this.state.event_create}
+					autoHideDuration={3000}
+					className={this.props.classes.snack}
+					onClose={(event, reason) => reason === 'clickaway' ? true : this.setState({event_create: false})}
+					message='Event correctly created'
+				/>
 			</>
 		);
 	}
@@ -168,4 +198,7 @@ const mapStateToProps = ( state ) => {
 	};
 };
 
-export default connect ( mapStateToProps ) ( PageEventDetails );
+export default compose(
+	connect(mapStateToProps),
+	withStyles(styles)
+)(PageEventDetails);

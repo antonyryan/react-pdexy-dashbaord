@@ -81,6 +81,7 @@ export const event_create = ( dct, onError ) => {
 				payload: { event_details: response.data }
 			} );
 
+			sessionStorage.setItem('event_create', true);
 			history.push ( `/event/${response.data.event._id}` );
 		} )
 
