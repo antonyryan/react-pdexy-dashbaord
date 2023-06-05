@@ -1,40 +1,24 @@
 import React from 'react';
-import { connect } from 'react-redux';
-
-import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import ClipCard from './ClipCard';
 
-class ClipModal extends React.Component 
+function ClipModal(props) 
 {
-	state = {
-		modal: false,
-		backdrop: true
-	};
-	
-	toggle = () => 
-	{
-		this.setState ( prevState => ({
-			modal: !prevState.modal
-		}), () => { this.props.onModalChange ( this.state.modal ) } );
-
-	}
-
-	componentWillReceiveProps = ( props ) =>
-	{
-		this.setState ( { modal: props.open } );
-	}
-
-	render = () => 
-	{
-		return (
-			<Modal size='lg' isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} backdrop={this.state.backdrop}>
-				<ModalHeader toggle={this.toggle}>{this.props.title}</ModalHeader>
-				<ModalBody>
-					<ClipCard clip={this.props.clip} />
-				</ModalBody>
-			</Modal>
-		);
-	}
+	return (
+		<Dialog
+			open={props.open}
+			onClose={() => props.onModalChange(false)}
+		>
+			<DialogTitle>{props.title}</DialogTitle>
+			<DialogContent>
+				{props.clip && (
+					<ClipCard clip={props.clip} />
+				)}
+			</DialogContent>
+		</Dialog>
+	);
 };
 
-export default connect () ( ClipModal );
+export default ClipModal;

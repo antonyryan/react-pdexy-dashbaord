@@ -42,10 +42,20 @@ class ClipMap extends React.Component
 	{
 		return (
 			<div>
-				<ClipModal clip={this.state.clip} open={this.state.show_modal} title={'Clip'} onModalChange={this.onModalChange}/>
+				<ClipModal
+					clip={this.state.clip}
+					open={this.state.show_modal}
+					onModalChange={this.onModalChange}
+					title={'Clip'}
+				/>
 				<Row>
 					<div className={'clip-map-container'}>
-						<GMapSimple {...this.props} draw_marker={true} clips={this.clips} onClick={this.clip_select} />
+						<GMapSimple
+							{...this.props}
+							draw_marker={true}
+							clips={this.clips}
+							onClick={this.clip_select}
+						/>
 					</div>
 				</Row>
 			</div>
