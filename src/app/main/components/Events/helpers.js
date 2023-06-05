@@ -31,8 +31,8 @@ export const kind2str = ( kind ) =>
 	{
 		case 1: return 'undefined';
 		case 2: return 'public';
-		case 3: return 'reserved';
+		case 3: return 'private';
 		case 4: return 'internal';
-		default: return '';
+		default: return 'no_kind';
 	}
 }

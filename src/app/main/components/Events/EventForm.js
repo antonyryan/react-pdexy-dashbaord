@@ -47,7 +47,7 @@ class EventForm extends React.Component
 		coupon: '',
 		notify: '',
 		loading: false,
-		dirth: false
+		dirty: false
 	};
 
 	componentDidMount = () =>
@@ -60,6 +60,7 @@ class EventForm extends React.Component
 		if ( ev )
 		{
 			const topic = topic2str ( ev.topic );
+			const kind = kind2str ( ev.kind );
 
 			this.setState ( { 
 				name: ev.name,
@@ -68,7 +69,7 @@ class EventForm extends React.Component
 				end: dateFromTimestamp ( ev.end ),
 				range: ev.range,
 				topic: topic === 'no_topic' ? '' : topic,
-				kind: kind2str ( ev.kind ),
+				kind: kind === 'no_kind' ? '' : kind,
 				coupon: ev.tags,
 				location: ev.location ? ev.location : { lat: 0, lng: 0, address: '' },
 				event: ev,
