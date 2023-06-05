@@ -10,7 +10,11 @@ export const clip_info = ( id_event, id_clip )  => {
 		.then  ( ( response ) => {
 			dispatch ( {
 				type: 'clip.info',
-				payload: { info: response.data.info, id_event: response.data.id_event, id_clip: response.data.id_clip }
+				payload: {
+					info: response.data.info,
+					id_event: response.data.id_event,
+					id_clip: response.data.id_clip
+				}
 			} );
 		} )
 

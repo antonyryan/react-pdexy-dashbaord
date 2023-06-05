@@ -25,44 +25,47 @@ class ClipCard extends React.Component
 					controls={true}
 					playing={false}
 					width='100%'
-					height='100%' />
+					height='100%'
+				/>
 				<CardBody>
 					<CardTitle>Status: {this.props.clip.status} - Length: {this.props.clip.length}</CardTitle>
 					<div>
 						<div>
 							{this.props.clip.owner.name} {this.props.clip.owner.lastname}
 						</div>
-						<Grid container spacing={1} className='mt-4'>
-							<Grid item>
-								{/* <Button className={'card-clip-button'} color="primary">Video</Button> */}
-								<Button
-									variant='outlined'
-									size='small'
-									href={this.props.clip.video}
-								>
-									Download
-								</Button> 
+						{!this.props.hideActionButton && (
+							<Grid container spacing={1} className='mt-4'>
+								<Grid item>
+									{/* <Button className={'card-clip-button'} color="primary">Video</Button> */}
+									<Button
+										variant='outlined'
+										size='small'
+										href={this.props.clip.video}
+									>
+										Download
+									</Button> 
+								</Grid>
+								<Grid item>
+									<Button
+										variant='outlined'
+										size='small'
+										color='primary'
+										onClick={ () => this.do_clip_info(this.props.clip)}
+									>
+										Info
+									</Button>
+								</Grid>
+								<Grid item>
+									<Button
+										variant='outlined'
+										color='secondary'
+										size='small'
+									>
+										Delete
+									</Button>
+								</Grid>
 							</Grid>
-							<Grid item>
-								<Button
-									variant='outlined'
-									size='small'
-									color='primary'
-									onClick={ () => this.do_clip_info(this.props.clip)}
-								>
-									Info
-								</Button>
-							</Grid>
-							<Grid item>
-								<Button
-									variant='outlined'
-									color='secondary'
-									size='small'
-								>
-									Delete
-								</Button>
-							</Grid>
-						</Grid>
+						)}
 					</div>
 				</CardBody>
 			</Card>
