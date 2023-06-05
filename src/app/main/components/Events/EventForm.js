@@ -46,7 +46,8 @@ class EventForm extends React.Component
 		ready: false,
 		coupon: '',
 		notify: '',
-		loading: false
+		loading: false,
+		dirth: false
 	};
 
 	componentDidMount = () =>
@@ -111,6 +112,10 @@ class EventForm extends React.Component
 
 		const dct = { ...this.state };
 
+		if (!dct.name || !dct.descr || !dct.kind || !dct.topic) {
+			this.setState({dirty: true});
+			return;
+		}
 		dct.start = new Date ( dct.start ).getTime ();
 		dct.end   = new Date ( dct.end ).getTime ();
 		// FIXME: in questo momento il campo 'coupon' mostra tutti i tag legati all'evento
@@ -154,10 +159,11 @@ class EventForm extends React.Component
 								name="name"
 								value={this.state.name}
 								onChange={this.update}
+								fullWidth
+								error={!this.state.name && this.state.dirty}
 								InputLabelProps={{
 									shrink: true,
 								}}
-								fullWidth
 							/>
 						</Grid>
 						<Grid item xs={12}>
@@ -169,15 +175,19 @@ class EventForm extends React.Component
 								onChange={this.update}
 								multiline={true}
 								placeholder="Event description"
+								fullWidth
+								error={!this.state.descr && this.state.dirty}
 								InputLabelProps={{
 									shrink: true,
 								}}
-								fullWidth
 							/>
 						</Grid>
 
 						<Grid item xs={12} sm={4}>
-							<FormControl fullWidth>
+							<FormControl
+								fullWidth
+								error={!this.state.kind && this.state.dirty}
+							>
 								<InputLabel shrink htmlFor="kind">Kind</InputLabel>
 								<Select
 									value={this.state.kind}
@@ -191,7 +201,10 @@ class EventForm extends React.Component
 							</FormControl>
 						</Grid>
 						<Grid item xs={12} sm={4}>
-							<FormControl fullWidth>
+							<FormControl
+								fullWidth
+								error={!this.state.topic && this.state.dirty}
+							>
 								<InputLabel shrink htmlFor="topic">Topic</InputLabel>
 								<Select
 									value={this.state.topic}
