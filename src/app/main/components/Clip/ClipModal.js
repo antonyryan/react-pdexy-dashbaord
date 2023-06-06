@@ -11,7 +11,9 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { makeStyles } from '@material-ui/core/styles';
-import ClipCard from './ClipCard';
+import ReactPlayer from 'react-player'
+import { status2str } from '../Events/helpers';
+
 import { clip_info } from './actions';
 
 const useStyles = makeStyles(theme => ({
@@ -48,26 +50,38 @@ function ClipModal(props)
 					<CloseIcon />
 				</IconButton>
 			</DialogTitle>
-			<DialogContent className={classes.dialogContent} dividers>
-				{props.clip && (
-					<ClipCard clip={props.clip} hideActionButton/>
-				)}
-			</DialogContent>
 			{props.clip && (
-				<DialogActions>
-					<Button href={props.clip.video}>
-						Download
-					</Button>
-					<Button
-						color="primary"
-						onClick={() => dispatch(clip_info(props.clip.id_event, props.clip._id))}
-					>
-						Info
-					</Button>
-					<Button color="secondary">
-						Delete
-					</Button>
-				</DialogActions>
+				<>
+					<DialogContent className={classes.dialogContent} dividers>
+						<ReactPlayer 
+							url={props.clip.video} 
+							controls={true}
+							playing={false}
+							width='100%'
+							height='100%'
+						/>
+						<Typography style={{marginTop: '10px'}}>
+							Status: {status2str(props.clip.status)}, Length: {props.clip.length}s
+						</Typography>
+						<Typography>
+							{props.clip.owner.name} {props.clip.owner.lastname}
+						</Typography>
+					</DialogContent>
+					<DialogActions>
+						<Button href={props.clip.video}>
+							Download
+						</Button>
+						<Button
+							color="primary"
+							onClick={() => dispatch(clip_info(props.clip.id_event, props.clip._id))}
+						>
+							Info
+						</Button>
+						<Button color="secondary">
+							Delete
+						</Button>
+					</DialogActions>
+				</>
 			)}
 		</Dialog>
 	);

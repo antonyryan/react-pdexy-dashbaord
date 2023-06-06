@@ -1,13 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
-import { clip_info } from './actions';
-
-import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
+import { Card, CardBody, CardTitle } from 'reactstrap';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
 
-import ReactPlayer from 'react-player'
+import { clip_info } from './actions';
+import { status2str } from '../Events/helpers';
+
+const styles = {
+	videoThumbnail: {
+		cursor: 'pointer',
+		transition: '.3s ease-in-out, .3s filter',
+
+		'&:hover': {
+			transform: 'scale(1.1)',
+			filter: 'brightness(150%)'
+		}
+	},
+
+	thumbnailContainer: {
+		overflow: 'hidden',
+		textAlign: 'center',
+		height: '200px',
+		marginBottom: '10px'
+	}
+}
 
 class ClipCard extends React.Component 
 {
@@ -20,52 +40,53 @@ class ClipCard extends React.Component
 	{
 		return (
 			<Card>
-				<ReactPlayer 
-					url={this.props.clip.video} 
-					controls={true}
-					playing={false}
-					width='100%'
-					height='100%'
-				/>
+				<div className={this.props.classes.thumbnailContainer}>
+					<img
+						src={this.props.clip.thumb}
+						alt='Image not found'
+						className={this.props.classes.videoThumbnail}
+						onClick={() => this.props.onClick(this.props.clip)}
+					/>
+				</div>
 				<CardBody>
-					<CardTitle>Status: {this.props.clip.status} - Length: {this.props.clip.length}</CardTitle>
+					<CardTitle>
+						Status: {status2str(this.props.clip.status)}, Length: {this.props.clip.length}
+					</CardTitle>
 					<div>
 						<div>
 							{this.props.clip.owner.name} {this.props.clip.owner.lastname}
 						</div>
-						{!this.props.hideActionButton && (
-							<Grid container spacing={1} className='mt-4'>
-								<Grid item>
-									{/* <Button className={'card-clip-button'} color="primary">Video</Button> */}
-									<Button
-										variant='outlined'
-										size='small'
-										href={this.props.clip.video}
-									>
-										Download
-									</Button> 
-								</Grid>
-								<Grid item>
-									<Button
-										variant='outlined'
-										size='small'
-										color='primary'
-										onClick={ () => this.do_clip_info(this.props.clip)}
-									>
-										Info
-									</Button>
-								</Grid>
-								<Grid item>
-									<Button
-										variant='outlined'
-										color='secondary'
-										size='small'
-									>
-										Delete
-									</Button>
-								</Grid>
+						<Grid container spacing={1} className='mt-4'>
+							<Grid item>
+								{/* <Button className={'card-clip-button'} color="primary">Video</Button> */}
+								<Button
+									variant='outlined'
+									size='small'
+									href={this.props.clip.video}
+								>
+									Download
+								</Button> 
 							</Grid>
-						)}
+							<Grid item>
+								<Button
+									variant='outlined'
+									size='small'
+									color='primary'
+									onClick={ () => this.do_clip_info(this.props.clip)}
+								>
+									Info
+								</Button>
+							</Grid>
+							<Grid item>
+								<Button
+									variant='outlined'
+									color='secondary'
+									size='small'
+								>
+									Delete
+								</Button>
+							</Grid>
+						</Grid>
 					</div>
 				</CardBody>
 			</Card>
@@ -74,4 +95,7 @@ class ClipCard extends React.Component
 	}
 };
 
-export default connect () ( ClipCard );
+export default compose(
+	connect(),
+	withStyles(styles)
+)(ClipCard);
