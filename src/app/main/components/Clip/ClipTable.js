@@ -31,7 +31,7 @@ class ClipTable extends React.Component
 				<Grid container spacing={2}>
 					{(this.props.event && this.props.event.clips) ? (
 						this.props.event.clips.map(clip => (
-							<Grid item key={clip._id} sm={6} md={4} lg={4}>
+							<Grid item key={clip._id} xs={12} sm={6} md={4} lg={3}>
 								<ClipCard clip={clip} onClick={this.openVideoDialog}/>
 							</Grid>
 						))

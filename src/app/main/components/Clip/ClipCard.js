@@ -17,14 +17,14 @@ const styles = {
 
 		'&:hover': {
 			transform: 'scale(1.1)',
-			filter: 'brightness(150%)'
+			filter: 'brightness(200%)'
 		}
 	},
 
 	thumbnailContainer: {
 		overflow: 'hidden',
 		textAlign: 'center',
-		height: '200px',
+		height: '150px',
 		marginBottom: '10px'
 	}
 }
@@ -43,20 +43,25 @@ class ClipCard extends React.Component
 				<div className={this.props.classes.thumbnailContainer}>
 					<img
 						src={this.props.clip.thumb}
-						alt='Image not found'
+						alt=''
 						className={this.props.classes.videoThumbnail}
 						onClick={() => this.props.onClick(this.props.clip)}
 					/>
 				</div>
 				<CardBody>
-					<CardTitle>
+					<CardTitle className='text-center'>
 						Status: {status2str(this.props.clip.status)}, Length: {this.props.clip.length}
 					</CardTitle>
 					<div>
-						<div>
+						<div className='text-center'>
 							{this.props.clip.owner.name} {this.props.clip.owner.lastname}
 						</div>
-						<Grid container spacing={1} className='mt-4'>
+						<Grid
+							container
+							spacing={1}
+							justify='center'
+							className='mt-4'
+						>
 							<Grid item>
 								{/* <Button className={'card-clip-button'} color="primary">Video</Button> */}
 								<Button
